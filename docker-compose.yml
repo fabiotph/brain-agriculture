@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:16.1-alpine
+    container_name: db
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -t 20"]
+      interval: 10s
+      timeout: 5m
+      retries: 10
+      start_period: 5s
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - ENVIRONMENT=dev
+    command: npm start
+    depends_on:
+      db:
+        condition: service_healthy
