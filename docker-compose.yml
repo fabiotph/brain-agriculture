@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     image: postgres:16.1-alpine
-    container_name: db
+    container_name: db-brain-agriculture
     restart: always
     tty: true
     environment:
@@ -24,13 +24,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: server
+    container_name: server-brain-agriculture
     restart: always
     ports:
       - 3000:3000
     environment:
       - ENVIRONMENT=dev
-      - DB_HOST=db
+      - DB_HOST=db-brain-agriculture
       - DB_USER=postgres
       - DB_NAME=brain-agriculture
       - DB_PASSWORD=root
