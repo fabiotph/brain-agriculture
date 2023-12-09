@@ -1,10 +1,9 @@
-import config from "./config";
-import express from "express";
+import config from './config';
 
-const app = express();
+import { createApp } from './app';
+
+const app = createApp();
 
 app.listen(config.port, () => {
-  console.log(
-    `\n Running into: PORT: ${config.port} | ENV: ${config.environment}`
-  );
+    console.log(`\n Running into: PORT: ${config.port} | ENV: ${config.environment}`);
 });
