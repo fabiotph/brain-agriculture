@@ -2,7 +2,6 @@ import express from "express";
 import { farmRouter, ruralProducerRouter } from "./routes";
 import { Postgres } from "./database";
 
-
 export const createApp = () => {
   const app = express();
 
@@ -14,6 +13,7 @@ export const createApp = () => {
   connectionDB
     .authenticate()
     .then(() => {
+      connectionDB.sync({ force: true });
       console.log("Connected to the database");
     })
     .catch((error: Error) => {
