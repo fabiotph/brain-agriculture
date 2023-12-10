@@ -21,7 +21,14 @@ export const createApp = () => {
   connectionDB
     .authenticate()
     .then(() => {
-      connectionDB.sync({ force: true });
+      if (config.environment === "dev") {
+        connectionDB.sync({ force: true }).then(() => {
+          RuralProducerModel.bulkCreate(mockData.ruralProducer);
+          ResourceModel.bulkCreate(mockData.resource);
+          FarmModel.bulkCreate(mockData.farm);
+          FarmResourceModel.bulkCreate(mockData.farmResource);
+        });
+      }
       console.log("Connected to the database");
     })
     .catch((error: Error) => {
