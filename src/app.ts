@@ -1,6 +1,14 @@
 import express from "express";
-import { farmRouter, ruralProducerRouter } from "./routes";
+import { dashboardRouter, farmRouter, ruralProducerRouter } from "./routes";
 import { Postgres } from "./database";
+import config from "./config";
+import {
+  FarmModel,
+  FarmResourceModel,
+  ResourceModel,
+  RuralProducerModel,
+} from "./models";
+import { mockData } from "./mockData";
 
 export const createApp = () => {
   const app = express();
@@ -23,6 +31,8 @@ export const createApp = () => {
   app.use("/ruralProducer", ruralProducerRouter);
 
   app.use("/farm", farmRouter);
+
+  app.use("/dashboard", dashboardRouter);
 
   return app;
 };
