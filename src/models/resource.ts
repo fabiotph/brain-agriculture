@@ -26,6 +26,4 @@ ResourceModel.init(
   }
 );
 
-
-
 export { ResourceModel };

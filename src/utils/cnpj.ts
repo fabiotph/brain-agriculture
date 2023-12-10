@@ -1,14 +1,18 @@
 import { isOnlyDigits, isSameCaracter } from "./string";
 
 const isValidCNPJ = (cnpj: string) => {
+  const error = () => {
+    throw Error("CNPJ is invalid");
+  };
+
   if (cnpj.length !== 14 || !isOnlyDigits(cnpj) || isSameCaracter(cnpj))
-    return false;
+    error();
 
   const isValidNumValidator = (sum: number, numValidator: number) => {
     const checkValidator = sum % 11;
     if (checkValidator < 2) {
-      if (numValidator !== 0) return false;
-    } else if (11 - checkValidator !== numValidator) return false;
+      if (numValidator !== 0) error();
+    } else if (11 - checkValidator !== numValidator) error();
 
     return true;
   };
@@ -26,7 +30,7 @@ const isValidCNPJ = (cnpj: string) => {
     [0, 0]
   );
 
-  if (!isValidNumValidator(sum1, validators[0])) return false;
+  if (!isValidNumValidator(sum1, validators[0])) error();
 
   sum2 += validators[0] * 2;
 

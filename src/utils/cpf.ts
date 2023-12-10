@@ -1,13 +1,17 @@
 import { isOnlyDigits, isSameCaracter } from "./string";
 
 const isValidCPF = (cpf: string) => {
-  if (cpf.length !== 11 || !isOnlyDigits(cpf) || isSameCaracter(cpf)) return false;
+  const error = () => {
+    throw Error("CPF is invalid");
+  };
+
+  if (cpf.length !== 11 || !isOnlyDigits(cpf) || isSameCaracter(cpf)) error();
 
   const isValidNumValidator = (sum: number, numValidator: number) => {
     const checkValidator = sum % 11;
     if (checkValidator < 2) {
-      if (numValidator !== 0) return false;
-    } else if (11 - checkValidator !== numValidator) return false;
+      if (numValidator !== 0) error();
+    } else if (11 - checkValidator !== numValidator) error();
 
     return true;
   };
@@ -23,7 +27,7 @@ const isValidCPF = (cpf: string) => {
     [0, 0]
   );
 
-  if (!isValidNumValidator(sum1, validators[0])) return false;
+  if (!isValidNumValidator(sum1, validators[0])) error();
 
   sum2 += validators[0] * 2;
 
