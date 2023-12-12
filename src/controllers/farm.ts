@@ -119,7 +119,7 @@ const updateFarm = async (id: string, input: InputFarm) => {
   if (rural_producer_id && !ruralProducerStoredId)
     throw Error("Rural producer not registred");
 
-  const [affectedRows] = await RuralProducerModel.update(
+  const [affectedRows] = await FarmModel.update(
     {
       name,
       city,
@@ -143,6 +143,7 @@ const updateFarm = async (id: string, input: InputFarm) => {
     const resourceStored = await ResourceModel.findOne({
       where: { type: res },
     });
+   
     if (resourceStored)
       await (
         await FarmResourceModel.create({
@@ -157,7 +158,7 @@ const updateFarm = async (id: string, input: InputFarm) => {
 
 const deleteFarm = async (id: string) => {
   const affectedRows = await FarmModel.destroy({ where: { id: parseInt(id) } });
-  if (!affectedRows) throw Error("Farm not found");
+  if (!affectedRows) throw Error("Farm not registred");
 };
 
 export { createFarm, getFarm, updateFarm, deleteFarm };
