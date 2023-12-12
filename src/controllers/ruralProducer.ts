@@ -64,7 +64,7 @@ const updateRuralProducer = async (id: string, input: InputRuralProducer) => {
 
 const deleteRuralProducer = async (id: string) => {
   const affectedRows = await RuralProducerModel.destroy({ where: { id: parseInt(id) } });
-  if (!affectedRows) throw Error("RuralProducer not found");
+  if (!affectedRows) throw Error("RuralProducer not registred");
 };
 
 export { createRuralProducer, updateRuralProducer, getProducer, deleteRuralProducer };

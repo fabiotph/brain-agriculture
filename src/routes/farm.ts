@@ -64,7 +64,7 @@ router
       res.status(204).send();
     }).catch((err) => {
       console.log("err", err.message);
-      res.status(500).json({ error: err.message });
+      res.status(400).json({ error: err.message });
     });
   });
 
