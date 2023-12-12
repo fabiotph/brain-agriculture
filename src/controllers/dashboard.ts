@@ -1,5 +1,5 @@
-import { CountOptions, Model, Op } from "sequelize";
-import { FarmModel, FarmResourceModel, ResourceModel } from "../models";
+import { CountOptions, Op } from "sequelize";
+import { FarmModel, FarmResourceModel } from "../models";
 import { calculatePercentage } from "../utils/number";
 import { Postgres } from "../database";
 import { DashboardModel } from "../models/dasboard";

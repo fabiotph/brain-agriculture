@@ -1,11 +1,11 @@
-import { isOnlyDigits, isSameCaracter } from "./string";
+import { isOnlyDigits, isSameDigits } from "./string";
 
 const isValidCNPJ = (cnpj: string) => {
   const error = () => {
     throw Error("CNPJ is invalid");
   };
 
-  if (cnpj.length !== 14 || !isOnlyDigits(cnpj) || isSameCaracter(cnpj))
+  if (cnpj.length !== 14 || !isOnlyDigits(cnpj) || isSameDigits(cnpj))
     error();
 
   const isValidNumValidator = (sum: number, numValidator: number) => {

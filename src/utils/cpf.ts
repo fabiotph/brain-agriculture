@@ -1,11 +1,11 @@
-import { isOnlyDigits, isSameCaracter } from "./string";
+import { isOnlyDigits, isSameDigits } from "./string";
 
 const isValidCPF = (cpf: string) => {
   const error = () => {
     throw Error("CPF is invalid");
   };
 
-  if (cpf.length !== 11 || !isOnlyDigits(cpf) || isSameCaracter(cpf)) error();
+  if (cpf.length !== 11 || !isOnlyDigits(cpf) || isSameDigits(cpf)) error();
 
   const isValidNumValidator = (sum: number, numValidator: number) => {
     const checkValidator = sum % 11;
