@@ -1,44 +1,138 @@
-# Teste - Brain Agriculture
+# Brain-Agriculture
 
-O teste tem como objetivo acurar as habilidades do candidato em resolver alguns problemas relacionados à lógica de programação, regra de negócio e orientação à objetos.
 
-O mesmo consiste em um cadastro de produtor rural com os seguintes dados:
+## :arrow_forward: Como executar
+* É necessário ter o [Docker](https://www.docker.com/) instalado.
 
-1.  CPF ou CNPJ
-2.  Nome do produtor
-3.  Nome da Fazenda
-4.  Cidade
-5.  Estado
-6.  Área total em hectares da fazenda
-7.  Área agricultável em hectares
-8.  Área de vegetação em hectares
-9.  Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)
+Execute o comando abaixo dentro da pasta do projeto:
 
-# Requisitos de negócio
+`docker-compose up`
 
-- O usuário deverá ter a possibilidade de cadastrar, editar, e excluir produtores rurais.
-- O sistema deverá validar CPF e CNPJ digitados incorretamente.
-- A soma de área agrícultável e vegetação, não deverá ser maior que a área total da fazenda
-- Cada produtor pode plantar mais de uma cultura em sua Fazenda.
-- A plataforma deverá ter um Dashboard que exiba:
-  - Total de fazendas em quantidade
-  - Total de fazendas em hectares (área total)
-  - Gráfico de pizza por estado.
-  - Gráfico de pizza por cultura.
-  - Gráfico de pizza por uso de solo (Área agricultável e vegetação)
+## :computer: Tecnologias usadas
+* Node
+* Express
+* Postgres
+* Docker
+* Jest
 
-# Requisitos técnicos
 
-- O desenvolvedor front-end deverá utilizar:
+## :link: Endpoints
+Rota                                | Método |  Descrição
+------------------------------------ | ------  | -----
+/ruralProducer                         |  POST  | Cria um novo produtor rural
+/ruralProducer  |  GET   |  Retorna todos os produtores rurais com suas respectivas fazendas
+/ruralProducer/:id  |  GET   |  Retorna o produtor rural do id enviado com suas respectivas fazendas
+/ruralProducer/:id  |  PATCH   |  Altera dados de um produtor rural
+/ruralProducer/:id  |  DELETE   |  Remove o produtor rural do id enviado (soft delete)
+/farm                         |  POST  | Cria uma nova fazenda
+/farm  |  GET   |  Retorna todas as fazendas e seu respectivo produtor rural
+/farm/:id  |  GET   |  Retorna a fazenda do id enviado e seu respectivo produtor rural
+/farm/:id  |  PATCH   |  Altera dados de uma fazenda
+/farm/:id  |  DELETE   |  Remove a fazenda do id enviado (soft delete)
+/dashboard  |  GET   |  Retorna todas as estatísticas
+/dashboard/:id  |  GET   |  Retorna as estatísticas de um produtor rural
 
-  - [ReactJS](http://reactjs.org);
-  - [Redux](https://redux.js.org/) para controlar o estado da aplicação.
-    - Caso entenda que faça sentido, utilize [Context API](https://reactjs.org/docs/context.html) como recurso adicional ou substituto ao Redux (Opcional)
-  - Crie pelo menos um teste unitário por componente (Opcional)
-  - A criação das estruturas de dados "mockados" faz parte da avaliação.
+## :book: Alguns exemplos
 
-- O desenvolvedor back-end deve:
-  - Salvar os dados em um banco de dados Postgres usando o NodeJS como layer de Backend, e entregar os endpoints para cadastrar, editar, e excluir produtores rurais, além do endpoint que retorne os totais para o dashboard.
-  - A criação das estruturas de dados "mockados" faz parte da avaliação.
-- O desenvolvedor full-stack deve realizar ambos, e concluir a integração.
-  > Não envie a solução como anexo, suba os fontes para seu Github (ou outro repositório) e envie o link para o avaliador.
+### POST /ruralProducer/
+#### Exemplo de corpo da Requisição:
+```json
+{
+	"cpf": "80662058054",
+	"name": "Sergião Foguetes"
+}
+```
+
+### POST /ruralProducer/
+#### Exemplo de corpo da Requisição:
+```json
+{
+	"cpf": "72260643000185",
+	"name": "Sandro Tobias Alves"
+}
+```
+
+### POST /farm/
+#### Exemplo de corpo da Requisição:
+```json
+{
+	"name": "Fazenda Feliz",
+	"city": "São Paulo",
+	"state": "SP",
+	"total_area": 19.2,
+	"agricultural_area": 2.3,
+	"vegetation_area": 14.1,
+	"resources": ["cafe", "soja"],
+	"rural_producer_id": 1
+}
+```
+
+### GET /dashboard/
+#### Exemplo de retorno da Requisição:
+```json
+{
+	"totalFarmCount": 4,
+	"total_area": 30.7,
+	"total_state": [
+		{
+			"state": "MG",
+			"total": 1,
+			"percentage": 25
+		},
+		{
+			"state": "RJ",
+			"total": 1,
+			"percentage": 25
+		},
+		{
+			"state": "SP",
+			"total": 2,
+			"percentage": 50
+		}
+	],
+	"total_resource": [
+		{
+			"type": "algodao",
+			"total": 1,
+			"percentage": 14.29
+		},
+		{
+			"type": "cafe",
+			"total": 2,
+			"percentage": 28.57
+		},
+		{
+			"type": "milho",
+			"total": 1,
+			"percentage": 14.29
+		},
+		{
+			"type": "soja",
+			"total": 3,
+			"percentage": 42.86
+		}
+	],
+	"farm_land_use": {
+		"agricultural_area": {
+			"total": 3.7,
+			"percentage": 12.05
+		},
+		"vegetation_area": {
+			"total": 22.2,
+			"percentage": 72.31
+		},
+		"unused_area": {
+			"total": 4.8,
+			"percentage": 15.64
+		}
+	}
+}
+```
+
+## :white_check_mark: Tests
+Instale as dependências do projeto:
+`npm install`
+
+Execute o comando abaixo dentro da pasta do projeto:  
+`npm run test`
+
