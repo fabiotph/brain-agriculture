@@ -47,7 +47,7 @@ Rota                                | Método |  Descrição
 #### Exemplo de corpo da Requisição:
 ```json
 {
-	"cpf": "72260643000185",
+	"cnpj": "72260643000185",
 	"name": "Sandro Tobias Alves"
 }
 ```
