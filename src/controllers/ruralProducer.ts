@@ -58,13 +58,19 @@ const updateRuralProducer = async (id: string, input: InputRuralProducer) => {
     where: { id: parseInt(id) },
   });
 
-  if(!affectedRows)
-    throw Error('RuralProducer not registred');
-};
-
-const deleteRuralProducer = async (id: string) => {
-  const affectedRows = await RuralProducerModel.destroy({ where: { id: parseInt(id) } });
   if (!affectedRows) throw Error("RuralProducer not registred");
 };
 
-export { createRuralProducer, updateRuralProducer, getProducer, deleteRuralProducer };
+const deleteRuralProducer = async (id: string) => {
+  const affectedRows = await RuralProducerModel.destroy({
+    where: { id: parseInt(id) },
+  });
+  if (!affectedRows) throw Error("RuralProducer not registred");
+};
+
+export {
+  createRuralProducer,
+  updateRuralProducer,
+  getProducer,
+  deleteRuralProducer,
+};

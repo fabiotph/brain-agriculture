@@ -39,7 +39,7 @@ router
     const id = req.params["id"];
     getProducer(id)
       .then((data) => {
-        res.status(200).json(data);
+        res.status(200).json(data ?? id ? {} : []);
       })
       .catch((err: Error) => {
         console.log("err", err.message);
@@ -60,12 +60,14 @@ router
 
   .delete((req, res) => {
     const id = req.params["id"];
-    deleteRuralProducer(id).then(()=>{
-      res.status(204).send();
-    }).catch((err) => {
-      console.log("err", err.message);
-      res.status(400).json({ error: err.message });
-    });
+    deleteRuralProducer(id)
+      .then(() => {
+        res.status(204).send();
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+        res.status(400).json({ error: err.message });
+      });
   });
 
 export { router };
