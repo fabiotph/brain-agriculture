@@ -2,6 +2,7 @@ import { FarmModel, ResourceModel, RuralProducerModel } from "../models";
 import { InputRuralProducer } from "../types";
 import { CreateRuralProducerSchema } from "../validations/ruralProducer/createRuralProducer";
 import { UpdateRuralProducerSchema } from "../validations/ruralProducer/updateRuralProducer";
+import { deleteFarm } from "./farm";
 
 const createRuralProducer = async (input: InputRuralProducer) => {
   const validation = CreateRuralProducerSchema.validate(input);
@@ -66,6 +67,18 @@ const deleteRuralProducer = async (id: string) => {
     where: { id: parseInt(id) },
   });
   if (!affectedRows) throw Error("RuralProducer not registred");
+
+  /**
+   * onDelete cascade don't work with paranoid = true (soft delete)
+   * Unfortunately in this version of the sequelize, hook beforeDestroy
+   * it is not working with soft-delete
+   */
+  const farms = await FarmModel.findAll({
+    where: { rural_producter_id: parseInt(id) },
+  });
+  for (let farm of farms) {
+    await deleteFarm(farm.dataValues.id);
+  }
 };
 
 export {

@@ -143,7 +143,7 @@ const updateFarm = async (id: string, input: InputFarm) => {
     const resourceStored = await ResourceModel.findOne({
       where: { type: res },
     });
-   
+
     if (resourceStored)
       await (
         await FarmResourceModel.create({
@@ -152,13 +152,18 @@ const updateFarm = async (id: string, input: InputFarm) => {
         })
       ).save();
   }
-
-  return;
 };
 
 const deleteFarm = async (id: string) => {
   const affectedRows = await FarmModel.destroy({ where: { id: parseInt(id) } });
   if (!affectedRows) throw Error("Farm not registred");
+
+  /**
+   * onDelete cascade don't work with paranoid = true (soft delete)
+   * Unfortunately in this version of the sequelize, hook beforeDestroy
+   * it is not working with soft-delete
+   */
+  await FarmResourceModel.destroy({ where: { farm_id: parseInt(id) } });
 };
 
 export { createFarm, getFarm, updateFarm, deleteFarm };
