@@ -78,12 +78,12 @@ const getFarm = async (id?: string) => {
   ];
   const attributes = { exclude: ["deletedAt", "rural_producer_id"] };
   return id
-    ? FarmModel.findOne({
+    ? (await FarmModel.findOne({
         where: { id: parseInt(id) },
         include,
         attributes,
-      })
-    : FarmModel.findAll({ include, attributes });
+      })) ?? {}
+    : (await FarmModel.findAll({ include, attributes })) ?? [];
 };
 
 const updateFarm = async (id: string, input: InputFarm) => {

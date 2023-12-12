@@ -38,7 +38,7 @@ router
     const id = req.params["id"];
     getFarm(id)
       .then((data) => {
-        res.status(200).json(data ?? id ? {} : []);
+        res.status(200).json(data);
       })
       .catch((err: Error) => {
         console.log("err", err.message);

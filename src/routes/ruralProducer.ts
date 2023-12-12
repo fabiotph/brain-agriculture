@@ -39,7 +39,7 @@ router
     const id = req.params["id"];
     getProducer(id)
       .then((data) => {
-        res.status(200).json(data ?? id ? {} : []);
+        res.status(200).json(data);
       })
       .catch((err: Error) => {
         console.log("err", err.message);

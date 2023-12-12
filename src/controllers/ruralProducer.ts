@@ -40,12 +40,12 @@ const getProducer = async (id?: string) => {
   const attributes = { exclude: ["deletedAt"] };
 
   return id
-    ? RuralProducerModel.findOne({
+    ? (await RuralProducerModel.findOne({
         where: { id: parseInt(id) },
         include,
         attributes,
-      })
-    : RuralProducerModel.findAll({ include, attributes });
+      })) ?? {}
+    : (await RuralProducerModel.findAll({ include, attributes })) ?? [];
 };
 
 const updateRuralProducer = async (id: string, input: InputRuralProducer) => {
