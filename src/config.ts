@@ -4,6 +4,7 @@ export enum EnvironmentEnum {
   PRD = "prd",
   HML = "hml",
   DEV = "dev",
+  TEST = "test",
 }
 
 export interface DatabaseSettings {
