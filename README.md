@@ -15,6 +15,9 @@ Execute o comando abaixo dentro da pasta do projeto:
 * Docker
 * Jest
 
+## 📒 DB Concept
+![Alt text](/docs/db-doc.png?raw=true "DB Concept")
+
 
 ## :link: Endpoints
 Rota                                | Método |  Descrição
