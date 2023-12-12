@@ -18,7 +18,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
   .post((req: IRequest<InputFarm>, res) => {
@@ -28,7 +28,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   });
 
@@ -42,7 +42,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
 
@@ -54,7 +54,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
 

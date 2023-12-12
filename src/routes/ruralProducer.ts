@@ -18,7 +18,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
 
@@ -29,7 +29,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   });
 
@@ -43,7 +43,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
   .patch((req: IRequest<InputRuralProducer>, res) => {
@@ -54,7 +54,7 @@ router
       })
       .catch((err: Error) => {
         console.log("err", err.message);
-        res.status(500).json({ error: err.message });
+        res.status(400).json({ error: err.message });
       });
   })
 
@@ -64,7 +64,7 @@ router
       res.status(204).send();
     }).catch((err) => {
       console.log("err", err.message);
-      res.status(500).json({ error: err.message });
+      res.status(400).json({ error: err.message });
     });
   });
 
